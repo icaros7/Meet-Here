@@ -40,44 +40,49 @@ function PlaceSearchBtn() {
 }
 
 function meetCenter () {
-    // 중간지점 계산하기
-    var sumLat = 0.0;
-    var sumLng = 0.0;
-    for (var i = 0;i < Number(markersPos.length);i++){
-        sumLat += Number((markersPos[i].newLat * 1).toFixed(4));
-        sumLng += Number((markersPos[i].newLng * 1).toFixed(4));
+    if (markersPks.length < 2) {
+        alert("최소 2곳 이상 선택해 주세요!");
+        }
+    else {
+        // 중간지점 계산하기
+        var sumLat = 0.0;
+        var sumLng = 0.0;
+        for (var i = 0;i < Number(markersPos.length);i++){
+            sumLat += Number((markersPos[i].newLat * 1).toFixed(4));
+            sumLng += Number((markersPos[i].newLng * 1).toFixed(4));
+        }
+        var imageSrc = 'https://raw.githubusercontent.com/icaros7/meet-Center/master/resource/marker.png', // 마커이미지의 주소입니다
+            imageSize = new daum.maps.Size(64, 64), // 마커이미지의 크기입니다
+            imageOption = {offset: new daum.maps.Point(32, 62)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+        var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
+        var bounds = new daum.maps.LatLngBounds();
+        var newPosLat = (sumLat / markersPos.length).toFixed(4);
+        var newPosLng = (sumLng / markersPos.length).toFixed(4);
+        var marker = new daum.maps.Marker({
+            map: map,
+            image: markerImage
+        });
+
+        var iwContent = new daum.maps.InfoWindow({
+            position: new daum.maps.LatLng(newPosLat, newPosLng),
+            content: "여기서 만나요!"
+        });
+
+        // 새로 submit 할 경우 기존 마커 제거
+        if (Center.length === 1) {
+            Center[0].setMap(null);
+            Center.pop();
+        }
+
+        Center.push(marker);
+        bounds.extend(new daum.maps.LatLng(newPosLat, newPosLng));
+        marker.setPosition(new daum.maps.LatLng(newPosLat, newPosLng));
+        iwContent.open(map, marker);
+        marker.setMap(map);
+        map.setBounds(bounds);
     }
-    var imageSrc = 'https://raw.githubusercontent.com/icaros7/meet-Center/master/resource/marker.png', // 마커이미지의 주소입니다
-        imageSize = new daum.maps.Size(64, 64), // 마커이미지의 크기입니다
-        imageOption = {offset: new daum.maps.Point(32, 62)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
-    var bounds = new daum.maps.LatLngBounds();
-    var newPosLat = (sumLat / markersPos.length).toFixed(4);
-    var newPosLng = (sumLng / markersPos.length).toFixed(4);
-    var marker = new daum.maps.Marker({
-        map: map,
-        image: markerImage
-    });
-
-    var iwContent = new daum.maps.InfoWindow({
-        position: new daum.maps.LatLng(newPosLat, newPosLng),
-        content: "여기서 만나요!"
-    });
-
-    // 새로 submit 할 경우 기존 마커 제거
-    if (Center.length === 1) {
-        Center[0].setMap(null);
-        Center.pop();
-    }
-
-    Center.push(marker);
-    bounds.extend(new daum.maps.LatLng(newPosLat, newPosLng));
-    marker.setPosition(new daum.maps.LatLng(newPosLat, newPosLng));
-    iwContent.open(map, marker);
-    marker.setMap(map);
-    map.setBounds(bounds);
 }
 
 function myHome(HomeLocation) {
