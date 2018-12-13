@@ -2,7 +2,7 @@
 다음지도(카카오맵) 오픈API를 이용한 각 위치의 중앙점을 구하는 웹 앱
 
 ## 사용법
-1. [dl.minnote.net/meetCenter](http://dl.minnote.net/meetCenter) 혹은 [meet.minnote.net](http://meet.minnote.net)를 접속 합니다.
+1. [dl.minnote.net/meetCenter](http://dl.minnote.net/meetCenter) 혹은 [HTML Preview를 통한 바로 실행 페이지](http://htmlpreview.github.io/?https://raw.githubusercontent.com/icaros7/meetCenter/master/index.html)를 접속 합니다.
 2. 원하는 위치에 핀을 찍습니다.
 3. 아이폰의 **홈버튼**을 누릅니다.
 4. 새로 찍힌 핀을 확인 합니다.
