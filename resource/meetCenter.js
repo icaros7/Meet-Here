@@ -40,9 +40,9 @@ function PlaceSearchBtn() {
 }
 
 function meetCenter () {
-    if (markersPks.length < 2) {
+    if (markersPos.length < 2) {
         alert("최소 2곳 이상 선택해 주세요!");
-        }
+    }
     else {
         // 중간지점 계산하기
         var sumLat = 0.0;
