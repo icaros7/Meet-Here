@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>중앙에서 만나</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<header id="header">
+    <h1><a href="https://icaros7.github.io/index.html" style="color: black; text-decoration: none;">iCAROS7's Updater</a></h1>
+</header>
+<hr>
+<section id="meetCenter">
+    <h1>중앙에서 만나</h1>
+    주소 검색 : <input id="adddress" type="text" onkeyup="enteraddress();"> <button id="addressSearchBtn" type="button" onclick="AddressSearchBtn()">검색</button><br>
+    이름 검색 : <input id="place" type="text" onkeyup="enterkey();"> <button id="placeSearchBtn" type="button" onclick="PlaceSearchBtn()">검색</button> ※첫번째 검색 결과만 반영
+    <hr>
+    <div style="position: relative; z-index: 1;">
+        <img src="resource/iPhone_Front.png"><br>
+        이미지 출처 : <a href="https://boltmobile.ca/phones-devices/sasktel-apple-iphones/apple-iphone-8-plus/" target="_blank">https://boltmobile.ca/phones-devices/sasktel-apple-iphones/apple-iphone-8-plus/</a>
+    </div>
+</section>
+<hr>
+<footer id="footer">
+    <a href="javascript:history.back()">Back to Main</a> / <a href="https://github.com/icaros7/meetCenter" target="_blank">This Project Git</a><br><br>
+    <a href="https://github.com/icaros7">Go to iCAROS7's github</a><br>
+    <a href="http://minnote.net">Go to minnote.net</a><br><br>
+    <b>Copyright (C) hominlab. All Right Reserved.</b>
+</footer>
+
+<div id="map" style="position: relative; width:852px;height:478px;top:-687px;left:175px;z-index: 3"></div>
+<div style="position: relative; z-index: 1;top:-1205px;left:75px;">
+    <img src="resource/iPhone_Home.png" onclick="meetCenter();">
+</div>
+<script type=" text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bca7aa6ee9ee132e2cca3bcc4bf6a104&libraries=services"></script>
+<script rel="script" src="resource/meetCenter.js"></script>
+</body>
+</html>
