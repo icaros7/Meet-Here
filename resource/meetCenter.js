@@ -49,7 +49,7 @@ function meetCenter () {
     }
     var imageSrc = 'https://raw.githubusercontent.com/icaros7/meet-Center/master/resource/marker.png', // 마커이미지의 주소입니다
         imageSize = new daum.maps.Size(70, 70), // 마커이미지의 크기입니다
-        imageOption = {offset: new daum.maps.Point(36, 160)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+        imageOption = {offset: new daum.maps.Point(16, 70)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
     var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
