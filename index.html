@@ -11,6 +11,16 @@
     function HowTo() {
         alert("텍스트박스에 마커의 이름을 입력 한 다음 클릭 하세요.\n빈칸인 경우 번호가 쓰여집니다.");
     }
+    function CheckName() {
+        if (document.getElementById("keydressToName").checked === true) {
+            document.getElementById("nameofMarker").value = "";
+            document.getElementById("nameofMarker").setAttribute('readonly', 'readonly');
+        }
+        else {
+            document.getElementById('nameofMarker').removeAttribute('readonly');
+        }
+    }
+
     </script>
 </head>
 <body>
@@ -21,9 +31,9 @@
 <section id="meetHere">
     <h1>여기서 만나요!</h1>
     <h4>마우스 클릭 혹은 검색을 통해 위치를 지정 한 뒤 홈버튼을 누르시면 중앙 지점이 표시됩니다.</h4>
-    마커 이름 : <input id="nameofMarker" type="text"> <button type="button" onclick="HowTo();">도움</button> <input id="dontrm" type="checkbox"><label for="dontrm">기존 중앙지점 지우지 않기</label><br>
-    주소 검색 : <input id="adddress" type="text" onkeyup="enteraddress();"> <button id="addressSearchBtn" type="button" onclick="AddressSearchBtn()">검색</button><br>
-    장소 검색 : <input id="place" type="text" onkeyup="enterkey();"> <button id="placeSearchBtn" type="button" onclick="PlaceSearchBtn()">검색</button>&nbsp;&nbsp;※첫번째 검색 결과만 반영
+    마커 이름 : <input id="nameofMarker" type="text" tabindex="1" readonly="readonly"> <button type="button" onclick="HowTo();" tabindex="-1">도움</button> <input id="dontrm" type="checkbox" tabindex="-1"><label for="dontrm">기존 중앙지점 지우지 않기</label><br>
+    주소 검색 : <input id="adddress" type="text" onkeyup="enteraddress();" tabindex="2"> <button id="addressSearchBtn" type="button" onclick="AddressSearchBtn()" tabindex="3">검색</button> <input id="keydressToName" type="checkbox" checked tabindex="-1" onclick="CheckName();"><label for="keydressToName">검색 주소/키워드를 마커 이름으로 쓰기</label><br>
+    장소 검색 : <input id="place" type="text" onkeyup="enterkey();" tabindex="4"> <button id="placeSearchBtn" type="button" onclick="PlaceSearchBtn()" tabindex="5">검색</button>&nbsp;&nbsp;※첫번째 검색 결과만 반영
     <hr>
     <div style="position: absolute; z-index: 1;">
         <img src="resource/iPhone_Front.png"><br>

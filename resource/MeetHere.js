@@ -31,12 +31,20 @@ function enterkey() {
 
 function AddressSearchBtn() {
     var keyword = document.getElementById("adddress");
+    var ToName = document.getElementById("keydressToName");
+    if (ToName.checked === true) {
+        document.getElementById("nameofMarker").value = keyword.value;
+    }
     geocoder.addressSearch(keyword.value, AddressSearch);
 }
 
 
 function PlaceSearchBtn() {
     var keyword = document.getElementById("place");
+    var ToName = document.getElementById("keydressToName");
+    if (ToName.checked === true) {
+        document.getElementById("nameofMarker").value = keyword.value;
+    }
     ps.keywordSearch(keyword.value, PlaceSearch);
 }
 
