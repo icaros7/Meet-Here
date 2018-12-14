@@ -66,22 +66,18 @@ function MeetHere () {
             image: markerImage
         });
 
-        var iwContent = new daum.maps.InfoWindow({
-            position: new daum.maps.LatLng(newPosLat, newPosLng),
-            content: centerCnt + ". 여기서 만나요!",
-            removable: true
-        });
-
+        var dontrmrm = document.getElementById("dontrm");
         // 새로 submit 할 경우 기존 마커 제거
         if (Center.length === 1) {
-            Center[0].setMap(null);
+            if (dontrmrm.checked == false) {
+                Center[0].setMap(null);
+            }
             Center.pop();
         }
 
         Center.push(marker);
         bounds.extend(new daum.maps.LatLng(newPosLat, newPosLng));
         marker.setPosition(new daum.maps.LatLng(newPosLat, newPosLng));
-        iwContent.open(map, marker);
         marker.setMap(map);
         map.setBounds(bounds);
         centerCnt++;
