@@ -51,7 +51,7 @@ function meetCenter () {
             sumLat += Number((markersPos[i].newLat * 1).toFixed(4));
             sumLng += Number((markersPos[i].newLng * 1).toFixed(4));
         }
-        var imageSrc = 'https://raw.githubusercontent.com/icaros7/meet-Center/master/resource/marker.png', // 마커이미지의 주소입니다
+        var imageSrc = 'https://raw.githubusercontent.com/icaros7/Meet-Here/master/resource/marker.png', // 마커이미지의 주소입니다
             imageSize = new daum.maps.Size(64, 64), // 마커이미지의 크기입니다
             imageOption = {offset: new daum.maps.Point(32, 62)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
