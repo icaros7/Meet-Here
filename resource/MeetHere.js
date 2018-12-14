@@ -15,6 +15,7 @@ daum.maps.event.addListener(map, 'click', function(mouseEvent) {
 var markers = [];
 var iwContents = []; // 인포 윈도우 객체를 가지고 있을 배열
 var markersPos = []; // marker의 위치만을 가지고 있을 배열
+var centerCnt = 1;
 
 function enteraddress() {
     if (window.event.keyCode == 13) {
@@ -51,9 +52,9 @@ function MeetHere () {
             sumLat += Number((markersPos[i].newLat * 1).toFixed(4));
             sumLng += Number((markersPos[i].newLng * 1).toFixed(4));
         }
-        var imageSrc = 'https://raw.githubusercontent.com/icaros7/Meet-Here/master/resource/marker.png', // 마커이미지의 주소입니다
-            imageSize = new daum.maps.Size(64, 64), // 마커이미지의 크기입니다
-            imageOption = {offset: new daum.maps.Point(32, 62)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+        var imageSrc = 'https://raw.githubusercontent.com/icaros7/Meet-Here/master/resource/marker.png', // 마커이미지의 주소   입니다
+            imageSize = new daum.maps.Size(96, 96), // 마커이미지의 크기입니다
+            imageOption = {offset: new daum.maps.Point(24, 95)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
         // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
         var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
@@ -67,7 +68,8 @@ function MeetHere () {
 
         var iwContent = new daum.maps.InfoWindow({
             position: new daum.maps.LatLng(newPosLat, newPosLng),
-            content: "여기서 만나요!"
+            content: centerCnt + ". 여기서 만나요!",
+            removable: true
         });
 
         // 새로 submit 할 경우 기존 마커 제거
@@ -82,6 +84,7 @@ function MeetHere () {
         iwContent.open(map, marker);
         marker.setMap(map);
         map.setBounds(bounds);
+        centerCnt++;
     }
 }
 
@@ -117,7 +120,7 @@ function myHome(HomeLocation) {
 
         var iwContent = new daum.maps.InfoWindow({
             position: HomeLocation,
-            content: (markersPos.length + 1) + "번째",
+            content: (markersPos.length + 1) + "번",
             removable: true
         });
     }
