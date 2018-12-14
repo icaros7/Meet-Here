@@ -39,7 +39,7 @@ function PlaceSearchBtn() {
     ps.keywordSearch(keyword.value, PlaceSearch);
 }
 
-function meetCenter () {
+function MeetHere () {
     if (markersPos.length < 2) {
         alert("최소 2곳 이상 선택해 주세요!");
     }
