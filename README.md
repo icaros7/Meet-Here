@@ -1,8 +1,8 @@
-# 중앙에서 만나
-다음지도(카카오맵) 오픈API를 이용한 각 위치의 중앙점을 구하는 웹 앱
+# 여기서 만나요!
+다음지도(카카오맵) 오픈API를 이용한 각 위치의 중앙점을 구하는 JavaScript 앱
 
 ## 사용법
-1. [dl.minnote.net/meet-Center](https://dl.minnote.net/meet-Center)를 접속 합니다.
+1. [dl.minnote.net/Meet-Center](https://dl.minnote.net/Meet-Center)를 접속 합니다.
 2. 원하는 위치에 핀을 찍습니다.
 3. 아이폰의 **홈버튼**을 누릅니다.
 4. 새로 찍힌 핀을 확인 합니다.
