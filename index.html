@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>여기서 만나요!</title>
-    <style type="text/css">
-    </style>
+    <script type="text/javascript">
+    var agent = navigator.userAgent.toLowerCase();
+    if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
+        alert("인터넷 익스플로러는 지원하지 않습니다.");
+    }
+    </script>
 </head>
 <body>
 <header id="header">
@@ -13,7 +17,7 @@
 <hr>
 <section id="meetHere">
     <h1>여기서 만나요!</h1>
-    <h4>마우스 클릭 혹은 검색을 통해 위치를 지정 한 뒤 홈버튼을 누르시면 중앙 지점이 표시됩니다.<br>Internet Explorer 환경에서 동작하지 않습니다.</h4>
+    <h4>마우스 클릭 혹은 검색을 통해 위치를 지정 한 뒤 홈버튼을 누르시면 중앙 지점이 표시됩니다.</h4>
     주소 검색 : <input id="adddress" type="text" onkeyup="enteraddress();"> <button id="addressSearchBtn" type="button" onclick="AddressSearchBtn()">검색</button><br>
     이름 검색 : <input id="place" type="text" onkeyup="enterkey();"> <button id="placeSearchBtn" type="button" onclick="PlaceSearchBtn()">검색</button> ※첫번째 검색 결과만 반영
     <hr>
