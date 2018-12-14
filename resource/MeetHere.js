@@ -96,11 +96,22 @@ function myHome(HomeLocation) {
             newLat: HomeLocation.y,
             newLng: HomeLocation.x
         };
-        var iwContent = new daum.maps.InfoWindow({
-            position: new daum.maps.LatLng(HomeLocation.y, HomeLocation.x),
-            content: (markersPos.length + 1) + "번째",
-            removable: true
-        });
+        var name = document.getElementById("nameofMarker");
+        if (name.value == ""){
+            var iwContent = new daum.maps.InfoWindow({
+                position: new daum.maps.LatLng(HomeLocation.y, HomeLocation.x),
+                content: (markersPos.length + 1) + "번째",
+                removable: true
+            });
+        }
+        else{
+            var iwContent = new daum.maps.InfoWindow({
+                position: new daum.maps.LatLng(HomeLocation.y, HomeLocation.x),
+                content: name.value,
+                removable: true
+            });
+            name.value = "";
+        }
     }
     else {
         var marker = new daum.maps.Marker({
@@ -114,11 +125,22 @@ function myHome(HomeLocation) {
             newLng: HomeLocation.getLng().toFixed(4)
         };
 
-        var iwContent = new daum.maps.InfoWindow({
-            position: HomeLocation,
-            content: (markersPos.length + 1) + "번",
-            removable: true
-        });
+        var name = document.getElementById("nameofMarker");
+        if (name.value == ""){
+            var iwContent = new daum.maps.InfoWindow({
+                position: HomeLocation,
+                content: (markersPos.length + 1) + "번",
+                removable: true
+            });
+        }
+        else {
+            var iwContent = new daum.maps.InfoWindow({
+                position: HomeLocation,
+                content: name.value,
+                removable: true
+            });
+            name.value = "";
+        }
     }
 
     // 마커가 지도 위에 표시되도록 설정합니다
