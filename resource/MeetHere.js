@@ -1,3 +1,5 @@
+utils.preloadImages(['iPhone_Front.png', 'iPhone_Home.png', 'marker.png']);
+
 var Center = [];
 var mapContainer = document.getElementById('map');
 var mapOptions = {
