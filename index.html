@@ -74,7 +74,7 @@
         // 현재 위치 버튼
         const locationButton = document.createElement("button");
         locationButton.style.marginTop = "10px";
-        locationButton.style.marginLeft = "10px";
+        locationButton.style.marginLeft = "3px";
         locationButton.textContent = "현재 위치";
         locationButton.style.fontSize = "16pt";
         locationButton.classList.add("custom-map-control-button");
@@ -83,7 +83,7 @@
         // 이름 재정의창
         const name = document.getElementById("nameofMarker");
         name.style.marginTop = "20px";
-        name.style.marginLeft = "10px";
+        name.style.marginLeft = "5px";
         name.style.width = "7vw";
         name.style.fontSize = "16pt";
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(name);
@@ -97,10 +97,9 @@
         
         // 만나요! 버튼
         const meetButton = document.createElement("button");
-        meetButton.style.marginTop = "10px";
         meetButton.textContent = "만나요!";
         meetButton.style.fontSize = "16pt";
-        meetButton.style.marginRight = "20px";
+        meetButton.style.marginRight = "10px";
         meetButton.style.marginTop = "20px";
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(meetButton);
 
