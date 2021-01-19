@@ -20,14 +20,11 @@
       defer
     ></script>
     <style type="text/css">
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
       #map {
         height: 60vh;
         margin: 0px 20px;
       }
 
-      /* Optional: Makes the sample page fill the window. */
       html,
       body {
         height: 90vh;
@@ -76,40 +73,43 @@
 
         // 현재 위치 버튼
         const locationButton = document.createElement("button");
-        locationButton.style.marginTop = "20px";
+        locationButton.style.marginTop = "10px";
+        locationButton.style.marginLeft = "10px";
         locationButton.textContent = "현재 위치";
+        locationButton.style.fontSize = "16pt";
         locationButton.classList.add("custom-map-control-button");
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(locationButton);
         
         // 이름 재정의창
         const name = document.getElementById("nameofMarker");
-        name.style.marginTop = "20px";
+        name.style.marginmarginTop = "10px";
         name.style.marginLeft = "10px";
         name.style.width = "7vw";
+        name.style.fontSize = "16pt";
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(name);
 
         // 검색창
         const input = document.getElementById("pac-input");
         input.style.width = "23vw";
+        input.style.fontSize = "16pt";
         const searchBox = new google.maps.places.SearchBox(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         
         // 만나요! 버튼
         const meetButton = document.createElement("button");
-        meetButton.style.marginTop = "20px";
+        meetButton.style.marginTop = "10px";
         meetButton.textContent = "만나요!";
-        meetButton.style.fontSize = "13pt";
+        meetButton.style.fontSize = "16pt";
         meetButton.style.marginRight = "20px";
         meetButton.style.marginTop = "20px";
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(meetButton);
 
         // 새로하기 버튼
         const newButton = document.createElement("button");
-        newButton.style.marginTop = "20px";
         newButton.textContent = "새로하기";
-        newButton.style.fontSize = "13pt";
+        newButton.style.fontSize = "16pt";
         newButton.style.marginRight = "5px";
-        newButton.style.marginTop = "20px";
+        newButton.style.marginTop = "10px";
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(newButton);
 
         // Bias the SearchBox results towards current map's viewport.
