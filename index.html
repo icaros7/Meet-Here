@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>여기서 만나요!</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70115574-2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-70115574-2');
+    </script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHV8YUCmlucmnBePRFg9VnhwsGzE3ui_k&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 60vh;
+        margin: 0px 20px;
+      }
+
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 90vh;
+        margin: 20px;
+        padding: 0;
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        margin-top: 20px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      .meetBtn {
+        font-style: italic;
+      }
+    </style>
+
+    <script>
+      let map, infoWindow, result;
+      result = false;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 37.53, lng: 127.0016985 },
+          zoom: 13,
+          streetViewControl: true,
+          streetViewControlOptions: {
+            position: google.maps.ControlPosition.LEFT_BOTTOM,
+          },
+          fullscreenControl: false,
+        });
+
+
+        infoWindow = new google.maps.InfoWindow();
+
+        // 현재 위치 버튼
+        const locationButton = document.createElement("button");
+        locationButton.style.marginTop = "20px";
+        locationButton.textContent = "현재 위치";
+        locationButton.classList.add("custom-map-control-button");
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(locationButton);
+        
+        // 이름 재정의창
+        const name = document.getElementById("nameofMarker");
+        name.style.marginTop = "20px";
+        name.style.marginLeft = "10px";
+        name.style.width = "7vw";
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(name);
+
+        // 검색창
+        const input = document.getElementById("pac-input");
+        input.style.width = "25vw";
+        const searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        
+        // 만나요! 버튼
+        const meetButton = document.createElement("button");
+        meetButton.style.marginTop = "20px";
+        meetButton.textContent = "만나요!";
+        meetButton.style.fontSize = "13pt";
+        meetButton.style.marginRight = "20px";
+        meetButton.style.marginTop = "20px";
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(meetButton);
+
+        // 새로하기 버튼
+        const newButton = document.createElement("button");
+        newButton.style.marginTop = "20px";
+        newButton.textContent = "새로하기";
+        newButton.style.fontSize = "13pt";
+        newButton.style.marginRight = "5px";
+        newButton.style.marginTop = "20px";
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(newButton);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener("bounds_changed", () => {
+          searchBox.setBounds(map.getBounds());
+        });
+        let markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener("places_changed", () => {
+          if (result == true){
+            alert("이미 결과가 있습니다.\n새로하기 버튼을 눌러주세요.");
+            event.preventDefault();
+          }
+          const places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+          // For each place, get the icon, name and location.
+          const bounds = new google.maps.LatLngBounds();
+          places.forEach((place) => {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            // Create a marker for each place.
+            let labelname;
+            if (document.getElementById("nameofMarker").value == "" || document.getElementById("nameofMarker").value == "마커 이름"){
+              labelname = document.getElementById("pac-input").value;
+            }
+            else{
+              labelname = document.getElementById("nameofMarker").value;
+              document.getElementById("nameofMarker").value = "";
+            }
+            markers.push(
+              new google.maps.Marker({
+                map,
+                title: place.name,
+                label: labelname,
+                position: place.geometry.location,
+              })
+            );
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+
+        locationButton.addEventListener("click", () => {
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                const pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+                // infoWindow.setPosition(pos);
+                // infoWindow.open(map);
+                map.setCenter(pos);
+                },
+                () => {
+                handleLocationError(true, infoWindow, map.getCenter());
+                }
+            );
+            } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+            }
+        });
+
+        newButton.addEventListener("click", () => {
+          var dontrm = document.getElementById("dontrm");
+          markers.forEach((marker) => {
+            marker.setMap(null);
+          });
+          markers = [];
+          result = false;
+          document.getElementById("pac-input").value = "";
+          document.getElementById("nameofMarker").value = "마커 이름";
+        })
+
+        meetButton.addEventListener("click", () => {
+          if (result == true){
+            alert("이미 결과가 있습니다.\n새로하기 버튼을 눌러주세요.");
+            event.preventDefault();
+          }
+          let sumLat = 0.0;
+          let sumLng = 0.0;
+
+          //TODO: sum 고치기
+          for (var i = 0; i < markers.length; i++){
+            sumLat += markers[i].position.lat();
+            sumLng += markers[i].position.lng();
+          }
+          const image = "https://raw.githubusercontent.com/icaros7/Meet-Here/google/resource/marker.png"
+          markers.push(
+            new google.maps.Marker({
+              map: map,
+              position: { lat: parseFloat(sumLat) / Number(markers.length), lng: parseFloat(sumLng) / Number(markers.length) },
+              icon: image,
+              animation: google.maps.Animation.DROP,
+            })
+          );
+          map.setCenter(markers[markers.length - 1].position);
+          result = true;
+        })
+
+        google.maps.event.addListener(map, 'click', function(event) {
+          if (result == true){
+            alert("이미 결과가 있습니다.\n새로하기 버튼을 눌러주세요.");
+            event.preventDefault();
+          }
+          let labelname;
+          if (document.getElementById("nameofMarker").value == "" || document.getElementById("nameofMarker").value == "마커 이름"){
+            labelname = String(markers.length + 1);
+          }
+          else{
+            labelname = document.getElementById("nameofMarker").value;
+            document.getElementById("nameofMarker").value = "";
+          }
+          markers.push(
+            new google.maps.Marker({
+              position: event.latLng, 
+              map: map,
+              label: labelname
+            })
+          );
+          document.getElementById("pac-input").value = "";
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <div style="padding-left: 20px;">
+      <h1>여기서 만나요!</h1>
+      <h4>알송달송한 우리들 위치의 중심점. 약속 장소 어디가 공평할까?</h4>
+      <h4>마우스 클릭 혹은 검색을 통해 위치를 지정 한 뒤 우측 상단 <span class="meetBtn">"만나요!"</span> 버튼을 누르시면 중앙 지점이 표시됩니다.</h4>
+      마커의 이름을 바꾸고 싶은 경우 마커 이름 란을 바꾸면 됩니다. 기본 값은 숫자, 검색 키워드 입니다.
+      <!-- <input
+        id="dontrm"
+        type="checkbox"
+        tabindex="3"
+      />
+      <label for="dontrm">기존 중앙지점 지우지 않기</label><br> -->
+      <hr>
+    </div>
+
+    <input
+      id="nameofMarker"
+      class="controls"
+      value="마커 이름"
+      type="text"
+      tabindex="1"
+    />
+    <input
+      id="pac-input"
+      class="controls"
+      type="text"
+      placeholder="장소 검색"
+      tabindex="2"
+      autofocus
+    />
+    <div id="map"></div>
+
+    <div style="padding-left: 20px;">
+      <h4>Powered By iCAROS7(<a href="https://minnote.net" target="_blank">minnote.net</a>) / Google Map</h4>
+      <h5>Version 2.0 (2021.01.19 15:41)</h5>
+    </div>
+  </body>
+</html>
