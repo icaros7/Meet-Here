@@ -114,6 +114,7 @@
         locationButton.style.fontSize = "16pt";
         locationButton.classList.add("custom-map-control-button");
         map.controls[google.maps.ControlPosition.RIGHT_TOP].push(locationButton);
+
         // Bias the SearchBox results towards current map's viewport.
         map.addListener("bounds_changed", () => {
           searchBox.setBounds(map.getBounds());
@@ -191,7 +192,6 @@
         });
 
         newButton.addEventListener("click", () => {
-          var dontrm = document.getElementById("dontrm");
           markers.forEach((marker) => {
             marker.setMap(null);
           });
@@ -259,12 +259,6 @@
       <h4>알송달송한 우리들 위치의 중심점. 약속 장소 어디가 공평할까?</h4>
       <h4>마우스 클릭 혹은 검색을 통해 위치를 지정 한 뒤 우측 상단 <span class="meetBtn">"만나요!"</span> 버튼을 누르시면 중앙 지점이 표시됩니다.</h4>
       마커의 이름을 바꾸고 싶은 경우 마커 이름 란을 바꾸면 됩니다. 기본 값은 숫자, 검색 키워드 입니다.
-      <!-- <input
-        id="dontrm"
-        type="checkbox"
-        tabindex="3"
-      />
-      <label for="dontrm">기존 중앙지점 지우지 않기</label><br> -->
       <hr>
     </div>
 
