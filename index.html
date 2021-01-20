@@ -70,6 +70,7 @@
             position: google.maps.ControlPosition.LEFT_BOTTOM,
           },
           fullscreenControl: false,
+          mapTypeControl: false,
         });
 
 
@@ -77,7 +78,7 @@
 
         // 이름 재정의창
         const name = document.getElementById("nameofMarker");
-        name.style.marginTop = "13px";
+        name.style.marginTop = "15px";
         name.style.marginLeft = "5px";
         name.style.width = "7vw";
         name.style.fontSize = "16pt";
@@ -92,15 +93,15 @@
         
         // 만나요! 버튼
         const meetButton = document.createElement("button");
-        meetButton.textContent = "만나요!";
+        meetButton.textContent = "만 나 요!";
         meetButton.style.fontSize = "16pt";
         meetButton.style.marginRight = "8px";
         meetButton.style.marginTop = "13px";
         map.controls[google.maps.ControlPosition.RIGHT_TOP].push(meetButton);
 
-        // 새로하기 버튼
+        // 새로 하기 버튼
         const newButton = document.createElement("button");
-        newButton.textContent = "새로하기";
+        newButton.textContent = "새로 하기";
         newButton.style.fontSize = "16pt";
         newButton.style.marginRight = "8px";
         newButton.style.marginTop = "8px";
@@ -124,7 +125,7 @@
         // more details for that place.
         searchBox.addListener("places_changed", () => {
           if (result == true){
-            alert("이미 결과가 있습니다.\n새로하기 버튼을 눌러주세요.");
+            alert("이미 결과가 있습니다.\n새로 하기 버튼을 눌러주세요.");
             event.preventDefault();
           }
           const places = searchBox.getPlaces();
@@ -203,7 +204,7 @@
 
         meetButton.addEventListener("click", () => {
           if (result == true){
-            alert("이미 결과가 있습니다.\n새로하기 버튼을 눌러주세요.");
+            alert("이미 결과가 있습니다.\n새로 하기 버튼을 눌러주세요.");
             event.preventDefault();
           }
           let sumLat = 0.0;
@@ -229,7 +230,7 @@
 
         google.maps.event.addListener(map, 'click', function(event) {
           if (result == true){
-            alert("이미 결과가 있습니다.\n새로하기 버튼을 눌러주세요.");
+            alert("이미 결과가 있습니다.\n새로 하기 버튼을 눌러주세요.");
             event.preventDefault();
           }
           let labelname;
