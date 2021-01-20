@@ -118,6 +118,7 @@
         locationButton.classList.add("custom-map-control-button");
         map.controls[google.maps.ControlPosition.RIGHT_TOP].push(locationButton);
 
+        // pac 검색창 기능
         // Bias the SearchBox results towards current map's viewport.
         map.addListener("bounds_changed", () => {
           searchBox.setBounds(map.getBounds());
@@ -146,6 +147,7 @@
             let labelname;
             if (document.getElementById("nameofMarker").value == ""){
               labelname = document.getElementById("pac-input").value;
+              document.getElementById("pac-input").value = "";
             }
             else{
               labelname = document.getElementById("nameofMarker").value;
@@ -233,9 +235,13 @@
             })
           );
           map.setCenter(markers[markers.length - 1].position);
+          map.setZoom(13);
+          document.getElementById("pac-input").value = "";
+          document.getElementById("nameofMarker").value = "";
           result = true;
         })
 
+        // 지도 클릭 이벤트
         google.maps.event.addListener(map, 'click', function(event) {
           if (result == true){
             alert("이미 결과가 있습니다.\n새로 하기 버튼을 눌러주세요.");
@@ -257,6 +263,8 @@
             })
           );
           document.getElementById("pac-input").value = "";
+          document.getElementById("pac-input").value = "";
+
         });
       }
     </script>
