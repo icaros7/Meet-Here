@@ -235,7 +235,8 @@
             })
           );
           map.setCenter(markers[markers.length - 1].position);
-          map.setZoom(13);
+          let tmpzoom = map.getZoom();
+          map.setZoom(tmpzoom - 2);
           document.getElementById("pac-input").value = "";
           document.getElementById("nameofMarker").value = "";
           result = true;
