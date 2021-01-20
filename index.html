@@ -33,7 +33,6 @@
       body {
         height: 90vh;
         margin: 20px;
-        padding: 0;
       }
 
       #pac-input {
@@ -129,7 +128,7 @@
         searchBox.addListener("places_changed", () => {
           if (result == true){
             alert("이미 결과가 있습니다.\n새로 하기 버튼을 눌러주세요.");
-            event.preventDefault();
+            return;
           }
           const places = searchBox.getPlaces();
 
@@ -171,6 +170,7 @@
           map.fitBounds(bounds);
         });
 
+        // 현재 위치 버튼 클릭 이벤트
         locationButton.addEventListener("click", () => {
             // Try HTML5 geolocation.
             if (navigator.geolocation) {
@@ -195,6 +195,7 @@
             }
         });
 
+        // 새로 하기 버튼 클릭 이벤트
         newButton.addEventListener("click", () => {
           markers.forEach((marker) => {
             marker.setMap(null);
@@ -205,15 +206,19 @@
           document.getElementById("nameofMarker").value = "";
         })
 
+        // 만나요 버튼 클릭 이벤트
         meetButton.addEventListener("click", () => {
+          if (markers == null || markers.length < 2){
+            alert("장소를 두 곳 이상 선택해야 합니다!");
+            return;
+          }
           if (result == true){
             alert("이미 결과가 있습니다.\n새로 하기 버튼을 눌러주세요.");
-            event.preventDefault();
+            return;
           }
           let sumLat = 0.0;
           let sumLng = 0.0;
 
-          //TODO: sum 고치기
           for (var i = 0; i < markers.length; i++){
             sumLat += markers[i].position.lat();
             sumLng += markers[i].position.lng();
@@ -234,7 +239,7 @@
         google.maps.event.addListener(map, 'click', function(event) {
           if (result == true){
             alert("이미 결과가 있습니다.\n새로 하기 버튼을 눌러주세요.");
-            event.preventDefault();
+            return;
           }
           let labelname;
           if (document.getElementById("nameofMarker").value == ""){
