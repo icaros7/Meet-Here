@@ -145,7 +145,7 @@
             }
             // Create a marker for each place.
             let labelname;
-            if (document.getElementById("nameofMarker").value == "" || document.getElementById("nameofMarker").value == "마커 이름"){
+            if (document.getElementById("nameofMarker").value == ""){
               labelname = document.getElementById("pac-input").value;
             }
             else{
@@ -202,7 +202,7 @@
           markers = [];
           result = false;
           document.getElementById("pac-input").value = "";
-          document.getElementById("nameofMarker").value = "마커 이름";
+          document.getElementById("nameofMarker").value = "";
         })
 
         meetButton.addEventListener("click", () => {
@@ -237,7 +237,7 @@
             event.preventDefault();
           }
           let labelname;
-          if (document.getElementById("nameofMarker").value == "" || document.getElementById("nameofMarker").value == "마커 이름"){
+          if (document.getElementById("nameofMarker").value == ""){
             labelname = String(markers.length + 1);
           }
           else{
@@ -269,7 +269,7 @@
     <input
       id="nameofMarker"
       class="controls"
-      value="마커 이름"
+      placeholder="마커 이름"
       type="text"
       tabindex="1"
     />
