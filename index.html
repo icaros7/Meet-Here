@@ -232,7 +232,12 @@
             sumLat += markers[i].position.lat();
             sumLng += markers[i].position.lng();
           }
-          const image = "https://raw.githubusercontent.com/icaros7/Meet-Here/google/resource/marker.png"
+          var image = {
+            url: "https://raw.githubusercontent.com/icaros7/Meet-Here/google/resource/marker.png",
+            size: new google.maps.Size(96, 96),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(23, 96),
+          };
           markers.push(
             new google.maps.Marker({
               map: map,
