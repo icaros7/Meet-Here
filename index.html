@@ -234,12 +234,32 @@
               animation: google.maps.Animation.DROP,
             })
           );
-          map.setCenter(markers[markers.length - 1].position);
-          let tmpzoom = map.getZoom();
-          map.setZoom(tmpzoom - 2);
+
+          var bounds = new google.maps.LatLngBounds();
+          for (var i = 0; i < markers.length; i++) {
+             bounds.extend(markers[i]);
+          }
+          map.fitBounds(bounds);
+
           document.getElementById("pac-input").value = "";
           document.getElementById("nameofMarker").value = "";
           result = true;
+        })
+
+        // 검색창 클릭 이벤트
+        input.addEventListener("click", () => {
+          if (result == true){
+            alert("이미 결과가 있습니다.\n새로 하기 버튼을 눌러주세요.");
+            return;
+          }
+        })
+
+        // 이름 재정의 클릭 이벤트
+        name.addEventListener("click", () => {
+          if (result == true){
+            alert("이미 결과가 있습니다.\n새로 하기 버튼을 눌러주세요.");
+            return;
+          }
         })
 
         // 지도 클릭 이벤트
